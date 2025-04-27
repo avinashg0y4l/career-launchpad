@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title> {# Uses the title from the markdown file's front matter #}
-    <link rel="stylesheet" href="/css/style.css"> {# We'll create this later #}
-    <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
+    {# REMOVED THE INCORRECT LINE #}
+    <link rel="stylesheet" href="{{ '/css/style.css' | url }}"> {# KEEP THIS CORRECT LINE #}
   </head>
   <body>
     <header>
-      <h1><a href="/">Student Opportunity Hub</a></h1>
+      <h1><a href="{{ '/' | url }}">Student Opportunity Hub</a></h1> {# ADDED | url filter #}
       {# Add navigation links here later if needed #}
     </header>
 
@@ -18,7 +18,7 @@
     </main>
 
     <footer>
-      <p>© {% year %} Your Name/Site Name</p> {# Eleventy provides a year shortcode by default sometimes, or we can add one #}
+      <p>© {% year %} Your Name/Site Name</p> {# Make sure you have the year shortcode in .eleventy.js #}
     </footer>
   </body>
 </html>
