@@ -1,27 +1,40 @@
-const { DateTime } = require("luxon"); // You might need to install luxon: npm install luxon
+const { DateTime } = require("luxon");
 
 module.exports = function(eleventyConfig) {
-  // Passthrough Copy: Copy `css/` folder to `_site/css/`
+  // Passthrough Copy for CSS, images, etc.
   eleventyConfig.addPassthroughCopy("css");
+  // eleventyConfig.addPassthroughCopy("img"); // Add if you have images
 
   // Shortcode for current year
   eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
 
-  // Optional: Add a filter for better date formatting if needed later
+  // Filter for date formatting
   eleventyConfig.addFilter("postDate", (dateObj) => {
-    return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
+    // ... (keep the date formatting logic) ...
+     try {
+        if (dateObj instanceof Date && !isNaN(dateObj)) {
+          return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
+        }
+        return dateObj || "";
+      } catch (error) {
+        console.error("Error formatting date:", error);
+        return dateObj || "";
+      }
   });
 
+  // Ensure you are still using the `url` filter in your templates!
+  // Example: <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
+  // Example: <a href="{{ '/' | url }}">Home</a>
+
   return {
-    // Set directories to watch and process
+    // No pathPrefix needed here for basic manual deploy
     dir: {
-      input: ".",       // Root folder for inputs
-      includes: "_includes", // Folder for layouts, etc.
-      output: "_site"      // Folder where the built site will go
+      input: ".",
+      includes: "_includes",
+      output: "_site" // This remains the output directory
     },
-    // Specify markdown processing options if needed
-    markdownTemplateEngine: "njk", // Use Nunjucks for Markdown files
-    htmlTemplateEngine: "njk",      // Use Nunjucks for HTML files
-    dataTemplateEngine: "njk",       // Use Nunjucks for data files
+    markdownTemplateEngine: "njk",
+    htmlTemplateEngine: "njk",
+    dataTemplateEngine: "njk",
   };
 };
