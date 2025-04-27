@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title> {# Uses the title from the markdown file's front matter #}
+    <link rel="stylesheet" href="/css/style.css"> {# We'll create this later #}
+  </head>
+  <body>
+    <header>
+      <h1><a href="/">Student Opportunity Hub</a></h1>
+      {# Add navigation links here later if needed #}
+    </header>
+
+    <main>
+      {{ content | safe }} {# This is where the markdown content will be inserted #}
+    </main>
+
+    <footer>
+      <p>© {% year %} Your Name/Site Name</p> {# Eleventy provides a year shortcode by default sometimes, or we can add one #}
+    </footer>
+  </body>
+</html>
