@@ -6,13 +6,14 @@
   "scripts": {
     "start": "npx @11ty/eleventy --serve",
     "build": "npx @11ty/eleventy",
-    "deploy": "npm run build && gh-pages -d _site" // Add this line
+    "deploy": "npm run build && gh-pages -d _site"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@11ty/eleventy": "^3.0.0"
+    "@11ty/eleventy": "^3.0.0",
+    "gh-pages": "^6.3.0"
   },
   "dependencies": {
     "luxon": "^3.6.1"
